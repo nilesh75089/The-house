@@ -1,0 +1,42 @@
+/* ==========================================================================
+   THE HOUSE — Pixel Transitions & Retro Animation Layer
+   ========================================================================== */
+
+/* 16-Bit Pixel Step Fade transitions */
+.room-transition-enter {
+  animation: pixelRoomEnter 0.45s steps(5, jump-end) forwards;
+}
+
+.room-transition-exit {
+  animation: pixelRoomExit 0.3s steps(4, jump-end) forwards;
+}
+
+@keyframes pixelRoomEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pixelRoomExit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+}

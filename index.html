@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE HOUSE — A place to disappear for a while</title>
+  <meta name="description" content="A private, quiet pixel-art digital sanctuary and personal music archive away from the noise of the outside world.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./src/css/main.css">
+  <link rel="stylesheet" href="./src/css/transitions.css">
+  <link rel="stylesheet" href="./src/css/hall.css">
+  <link rel="stylesheet" href="./src/css/room1_thoughts.css">
+  <link rel="stylesheet" href="./src/css/room2_cinema.css">
+  <link rel="stylesheet" href="./src/css/room3_music.css">
+  <link rel="stylesheet" href="./src/css/room4_imagination.css">
+  <link rel="stylesheet" href="./src/css/room5_study.css">
+</head>
+<body class="in-hall">
+  <!-- Dynamic Pixel Background Layers -->
+  <div id="ambient-backdrop" class="ambient-backdrop">
+    <div class="bg-layer bg-hall active" style="background-image: url('./assets/pixel_main_hall.png');"></div>
+    <div class="bg-layer bg-room1" style="background-image: url('./assets/pixel_bedroom.png');"></div>
+    <div class="bg-layer bg-room2" style="background-image: url('./assets/pixel_cinema.png');"></div>
+    <div class="bg-layer bg-room3" style="background-image: url('./assets/pixel_music_window.png');"></div>
+    <div class="bg-layer bg-room4" style="background-image: url('./assets/pixel_landscape.png');"></div>
+    <div class="bg-layer bg-room5" style="background-image: url('./assets/pixel_study.png');"></div>
+    <div class="pixel-scanlines"></div>
+    <div class="dark-vignette"></div>
+  </div>
+
+  <!-- Procedural Pixel Atmosphere Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Top Navigation -->
+  <header id="house-header" class="house-header">
+    <button id="btn-return-hall" class="nav-house-link pixel-box-sm" aria-label="Return to THE HOUSE">
+      <span class="nav-glyph">◄</span>
+      <span class="nav-text">THE HOUSE</span>
+      <span class="nav-key">[ESC]</span>
+    </button>
+    <div id="room-indicator" class="room-indicator"></div>
+  </header>
+
+  <!-- Main View Container -->
+  <main id="view-viewport" class="view-viewport">
+    
+    <!-- ==================== ENTRANCE — THE HOUSE ==================== -->
+    <section id="view-hall" class="room-view active" data-room="hall">
+      <div class="hall-content">
+        <div class="hall-hero pixel-box">
+          <span class="hall-eyebrow">A PRIVATE SANCTUARY</span>
+          <h1 class="hall-title">THE HOUSE</h1>
+          <p class="hall-subtitle">“A place to disappear for a while.”</p>
+        </div>
+
+        <nav class="hall-portals" aria-label="Rooms">
+          <button class="portal-door pixel-box-btn" data-goto="room1" id="door-room1">
+            <span class="door-num">[01]</span>
+            <div class="door-info">
+              <span class="door-name">WHAT AM I THINKING?</span>
+              <span class="door-desc">A lonely bedroom at night. Rain, desk lamp, and quiet thoughts.</span>
+            </div>
+            <span class="door-arrow">►</span>
+          </button>
+
+          <button class="portal-door pixel-box-btn" data-goto="room2" id="door-room2">
+            <span class="door-num">[02]</span>
+            <div class="door-info">
+              <span class="door-name">WHAT DID I WATCH?</span>
+              <span class="door-desc">An old cinema at night. Seats fading into darkness and film memories.</span>
+            </div>
+            <span class="door-arrow">►</span>
+          </button>
+
+          <button class="portal-door pixel-box-btn" data-goto="room3" id="door-room3">
+            <span class="door-num">[03]</span>
+            <div class="door-info">
+              <span class="door-name">WHAT AM I LISTENING TO?</span>
+              <span class="door-desc">Personal music archive. Staged approval queue and listening chronicle.</span>
+            </div>
+            <span class="door-arrow">►</span>
+          </button>
+
+          <button class="portal-door pixel-box-btn" data-goto="room4" id="door-room4">
+            <span class="door-num">[04]</span>
+            <div class="door-info">
+              <span class="door-name">MY IMAGINATION</span>
+              <span class="door-desc">A surreal landscape at night. Where did your mind go?</span>
+            </div>
+            <span class="door-arrow">►</span>
+          </button>
+
+          <button class="portal-door pixel-box-btn" data-goto="room5" id="door-room5">
+            <span class="door-num">[05]</span>
+            <div class="door-info">
+              <span class="door-name">DID I STUDY?</span>
+              <span class="door-desc">A quiet desk beside the window. An honest record of reality.</span>
+            </div>
+            <span class="door-arrow">►</span>
+          </button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ==================== ROOM 1: WHAT AM I THINKING? ==================== -->
+    <section id="view-room1" class="room-view" data-room="room1">
+      <div class="room-inner room1-container">
+        <header class="room-title-block pixel-header-box">
+          <span class="room-number-tag">ROOM 01 // BEDROOM</span>
+          <h2 class="room-heading">WHAT AM I THINKING?</h2>
+          <p class="room-subtext">A quiet night outside the window. Write whatever is going through your mind.</p>
+        </header>
+
+        <!-- Room 1 Ambient Audio Player Badge -->
+        <div class="room1-audio-badge pixel-sub-box">
+          <div class="audio-badge-left">
+            <span class="music-note-icon">♫</span>
+            <div class="audio-badge-info">
+              <span class="audio-badge-title">Two Different Worlds (Super Slowed + Reverb)</span>
+              <span class="audio-badge-artist">KoruSe · mzmff</span>
+            </div>
+          </div>
+          <div class="audio-badge-actions">
+            <button id="btn-toggle-thoughts-yt" class="btn-pixel-secondary btn-sm" title="Toggle Music">▶ PLAY</button>
+            <a href="https://music.youtube.com/watch?v=Niu8Kv2hrU8&list=RDAMVMNiu8Kv2hrU8" target="_blank" rel="noopener noreferrer" class="btn-pixel-icon btn-sm" title="Open in YouTube Music">↗</a>
+          </div>
+        </div>
+
+        <!-- Hidden YouTube Player Iframe -->
+        <div id="thoughts-yt-player-container" class="hidden-yt-container">
+          <div id="thoughts-yt-player"></div>
+        </div>
+
+        <div class="thought-composer pixel-box">
+          <textarea id="thought-input" placeholder="Write something..." rows="4"></textarea>
+          <div class="composer-actions">
+            <div class="composer-hint">Press <kbd>CTRL</kbd> + <kbd>ENTER</kbd> to leave thought</div>
+            <button id="btn-save-thought" class="btn-pixel-primary">LEAVE THOUGHT</button>
+          </div>
+        </div>
+
+        <div class="thoughts-stream-section">
+          <div class="stream-header pixel-bar">
+            <span class="stream-label">ECHOES OF MIND</span>
+            <span id="thoughts-count" class="stream-meta">0 thoughts recorded</span>
+          </div>
+          <div id="thoughts-timeline" class="thoughts-timeline">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ROOM 2: WHAT DID I WATCH? ==================== -->
+    <section id="view-room2" class="room-view" data-room="room2">
+      <div class="room-inner room2-container">
+        <header class="room-title-block pixel-header-box">
+          <span class="room-number-tag">ROOM 02 // CINEMA</span>
+          <h2 class="room-heading">WHAT DID I WATCH?</h2>
+          <p class="room-subtext">Dust particles in the projector beam. A personal record of films.</p>
+        </header>
+
+        <!-- Statistics -->
+        <div class="cinema-stats-bar pixel-box">
+          <div class="stat-item">
+            <span class="stat-label">FINISHED</span>
+            <span id="stat-finished" class="stat-val">0</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">OPENED & CLOSED</span>
+            <span id="stat-opened" class="stat-val">0</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">CURRENTLY WATCHING</span>
+            <span id="stat-watching" class="stat-val">0</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-summary">
+            <span class="stat-label">How many movies did I actually watch completely?</span>
+            <span id="stat-completion-ratio" class="stat-prose">—</span>
+          </div>
+        </div>
+
+        <!-- Cinema Entry Form -->
+        <div class="cinema-composer pixel-box">
+          <div class="cinema-form-row">
+            <input type="text" id="movie-title-input" class="pixel-input" placeholder="Movie title..." autocomplete="off">
+            <div class="cinema-status-options" id="cinema-status-group">
+              <label class="status-radio-label pixel-radio">
+                <input type="radio" name="movie-status" value="watching" checked>
+                <span>Currently watching</span>
+              </label>
+              <label class="status-radio-label pixel-radio">
+                <input type="radio" name="movie-status" value="finished">
+                <span>Finished</span>
+              </label>
+              <label class="status-radio-label pixel-radio">
+                <input type="radio" name="movie-status" value="abandoned">
+                <span>Opened & closed</span>
+              </label>
+            </div>
+          </div>
+          <div class="cinema-composer-actions">
+            <input type="text" id="movie-note-input" class="pixel-input" placeholder="Optional reflection or director notes..." autocomplete="off">
+            <button id="btn-save-movie" class="btn-pixel-primary">RECORD FILM</button>
+          </div>
+        </div>
+
+        <!-- Cinema Log List -->
+        <div class="cinema-log-section">
+          <div class="cinema-filter-tabs pixel-bar">
+            <button class="cinema-tab active" data-filter="all">ALL</button>
+            <button class="cinema-tab" data-filter="watching">WATCHING</button>
+            <button class="cinema-tab" data-filter="finished">FINISHED</button>
+            <button class="cinema-tab" data-filter="abandoned">OPENED & CLOSED</button>
+          </div>
+          <div id="cinema-movies-list" class="cinema-movies-list">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ROOM 3: WHAT AM I LISTENING TO? (PERSONAL MUSIC ARCHIVE) ==================== -->
+    <section id="view-room3" class="room-view" data-room="room3">
+      <div class="room-inner room3-container">
+        <header class="room-title-block pixel-header-box">
+          <span class="room-number-tag">ROOM 03 // PERSONAL MUSIC ARCHIVE</span>
+          <h2 class="room-heading">WHAT AM I LISTENING TO?</h2>
+          <p class="room-subtext">A private archive of the music that actually accompanied my life.</p>
+        </header>
+
+        <!-- Top Row: NOW PLAYING & NEW SONGS Review Queue -->
+        <div class="music-archive-top-grid">
+          <!-- SECTION: NOW PLAYING & REAL AUDIO DECK -->
+          <div class="music-now-panel pixel-box">
+            <div class="section-title-row">
+              <div class="now-title-group">
+                <span class="panel-tag">NOW PLAYING</span>
+                <span id="now-source-tag" class="pixel-source-badge">ARCHIVE</span>
+              </div>
+              <label class="btn-pixel-secondary btn-sm file-upload-label" title="Play any local MP3/WAV/FLAC file">
+                <input type="file" id="input-audio-file-direct" accept="audio/*" class="hidden-file-input">
+                <span>📁 LOAD MP3</span>
+              </label>
+            </div>
+
+            <div class="now-playing-display" id="now-playing-box">
+              <div class="pixel-cassette" id="cassette-deck">
+                <div class="cassette-tape-spool cassette-tape-left">
+                  <div class="spool-teeth"></div>
+                </div>
+                <div class="cassette-window">
+                  <canvas id="cassette-visualizer-canvas" class="cassette-visualizer-canvas" width="160" height="28"></canvas>
+                </div>
+                <div class="cassette-tape-spool cassette-tape-right">
+                  <div class="spool-teeth"></div>
+                </div>
+              </div>
+              <div class="now-meta">
+                <h3 id="current-song-title" class="now-song">Gymnopédie No. 1</h3>
+                <p id="current-song-artist" class="now-artist">Érik Satie</p>
+                <p id="current-song-album" class="now-album">Nocturnes & Reveries</p>
+              </div>
+            </div>
+
+            <!-- Real Audio Player Transport Controls -->
+            <div class="music-player-controls pixel-sub-box">
+              <!-- Timeline Scrubber -->
+              <div class="player-timeline-row">
+                <span id="music-time-current" class="time-label">0:00</span>
+                <input type="range" id="music-progress-slider" class="pixel-slider" min="0" max="100" value="0" step="0.1" aria-label="Seek track">
+                <span id="music-time-total" class="time-label">3:30</span>
+              </div>
+
+              <!-- Buttons: Prev, Play/Pause, Next & Volume -->
+              <div class="player-buttons-row">
+                <div class="transport-main">
+                  <button id="btn-music-prev" class="btn-pixel-icon" title="Previous Track">⏮</button>
+                  <button id="btn-music-play" class="btn-pixel-play" title="Play / Pause">▶ PLAY</button>
+                  <button id="btn-music-next" class="btn-pixel-icon" title="Next Track">⏭</button>
+                </div>
+                <div class="transport-volume">
+                  <span class="volume-icon">🔊</span>
+                  <input type="range" id="music-volume-slider" class="pixel-slider volume-slider" min="0" max="100" value="85" aria-label="Volume">
+                </div>
+              </div>
+            </div>
+
+            <!-- Set Now Playing Form -->
+            <div class="music-form-block">
+              <div class="music-inputs">
+                <input type="text" id="music-song-input" class="pixel-input" placeholder="Song title..." autocomplete="off">
+                <input type="text" id="music-artist-input" class="pixel-input" placeholder="Artist..." autocomplete="off">
+                <input type="text" id="music-album-input" class="pixel-input" placeholder="Album / EP..." autocomplete="off">
+              </div>
+              <button id="btn-save-music" class="btn-pixel-primary full-width">SET NOW PLAYING</button>
+            </div>
+          </div>
+
+          <!-- SECTION: NEW SONGS (Pending Review Queue) -->
+          <div class="music-pending-panel pixel-box">
+            <div class="section-title-row">
+              <div class="pending-header-left">
+                <span class="panel-tag">NEW SONGS</span>
+                <span id="pending-count-badge" class="pixel-badge-counter">0 PENDING</span>
+              </div>
+              <div class="pending-header-actions">
+                <button id="btn-open-import-modal" class="btn-pixel-secondary btn-sm" title="Import YouTube Music / Takeout History">📥 IMPORT</button>
+                <button id="btn-keep-all" class="btn-pixel-primary btn-sm" title="Approve all pending songs">KEEP ALL</button>
+                <button id="btn-discard-all" class="btn-text-danger btn-sm" title="Discard all pending songs">DISCARD ALL</button>
+              </div>
+            </div>
+
+            <p class="pending-sub-note">Review imported songs before adding to permanent archive:</p>
+
+            <div id="pending-songs-list" class="pending-songs-list">
+              <!-- Pending entries with KEEP & DISCARD buttons -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Row: MUSIC HISTORY STATISTICS -->
+        <div class="music-stats-panel pixel-box">
+          <div class="section-title-row">
+            <span class="panel-tag">MUSIC HISTORY STATISTICS</span>
+            <span class="stats-period-hint">Nocturnal Analytics</span>
+          </div>
+
+          <div class="music-archive-stats-grid">
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">MOST LISTENED SONG</span>
+              <span id="mstat-top-song" class="mstat-val">—</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">MOST LISTENED ARTIST</span>
+              <span id="mstat-top-artist" class="mstat-val">—</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">TOTAL SONGS LISTENED TO</span>
+              <span id="mstat-total-songs" class="mstat-val">0</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">TOTAL LISTENING SESSIONS</span>
+              <span id="mstat-total-sessions" class="mstat-val">0</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">TOTAL LISTENING TIME</span>
+              <span id="mstat-total-time" class="mstat-val">0h 0m</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">SONGS TODAY</span>
+              <span id="mstat-songs-today" class="mstat-val">0</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">SONGS THIS WEEK</span>
+              <span id="mstat-songs-week" class="mstat-val">0</span>
+            </div>
+            <div class="mstat-card pixel-sub-box">
+              <span class="mstat-lbl">SONGS THIS MONTH</span>
+              <span id="mstat-songs-month" class="mstat-val">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: MOST LISTENED & RECENTLY LISTENED ARCHIVE -->
+        <div class="music-archive-bottom-grid">
+          <!-- SECTION: MOST LISTENED -->
+          <div class="most-listened-panel pixel-box">
+            <div class="section-title-row">
+              <span class="panel-tag">MOST LISTENED (ALL TIME)</span>
+            </div>
+            <ol id="most-listened-list" class="most-listened-list">
+              <!-- Top songs rendered dynamically -->
+            </ol>
+          </div>
+
+          <!-- SECTION: RECENTLY LISTENED (MUSIC HISTORY FEED) -->
+          <div class="music-history-panel pixel-box">
+            <div class="section-title-row">
+              <span class="panel-tag">RECENTLY LISTENED</span>
+              <span id="history-total-tag" class="stream-meta">0 entries</span>
+            </div>
+            <div id="music-journal-list" class="music-journal-list">
+              <!-- Approved history entries rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ROOM 4: MY IMAGINATION ==================== -->
+    <section id="view-room4" class="room-view" data-room="room4">
+      <div class="room-inner room4-container">
+        <header class="room-title-block pixel-header-box">
+          <span class="room-number-tag">ROOM 04 // THE ETHER</span>
+          <h2 class="room-heading">MY IMAGINATION</h2>
+          <p class="room-subtext">“Where did your mind go?”</p>
+        </header>
+
+        <!-- Room 4 Ambient Audio Player Badge -->
+        <div class="room4-audio-badge pixel-sub-box">
+          <div class="audio-badge-left">
+            <span class="music-note-icon celestial">✦</span>
+            <div class="audio-badge-info">
+              <span class="audio-badge-title">Distant Echoes (Slowed + Reverb)</span>
+              <span class="audio-badge-artist">VXLLAIN · VØJ · Narvent</span>
+            </div>
+          </div>
+          <div class="audio-badge-actions">
+            <button id="btn-toggle-imagination-yt" class="btn-pixel-secondary btn-sm" title="Toggle Music">▶ PLAY</button>
+            <a href="https://music.youtube.com/watch?v=vA3praIBO8c" target="_blank" rel="noopener noreferrer" class="btn-pixel-icon btn-sm" title="Open in YouTube Music">↗</a>
+          </div>
+        </div>
+
+        <!-- Hidden YouTube Player Iframe -->
+        <div id="imagination-yt-player-container" class="hidden-yt-container">
+          <div id="imagination-yt-player"></div>
+        </div>
+
+        <!-- Imagination Expanse Composer -->
+        <div class="imagination-composer pixel-box">
+          <input type="text" id="imagination-title-input" class="pixel-input" placeholder="Title of scenario or vision (optional)..." autocomplete="off">
+          <textarea id="imagination-body-input" placeholder="A scene, a fictional world, an unspoken situation, an impossible landscape..." rows="5"></textarea>
+          <div class="imagination-composer-actions">
+            <span class="imagination-hint">Fragments will float gently into the night sky.</span>
+            <button id="btn-save-imagination" class="btn-pixel-primary">RELEASE INTO MIND</button>
+          </div>
+        </div>
+
+        <!-- Floating Fragments Expanse -->
+        <div class="fragments-section">
+          <div class="fragments-header pixel-bar">
+            <span class="fragments-tag">ETHEREAL FRAGMENTS</span>
+            <span id="fragments-count" class="fragments-counter">0 fragments</span>
+          </div>
+          <div id="fragments-canvas-container" class="fragments-grid">
+            <!-- Fragments rendered as subtle floating pixel nodes -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ROOM 5: DID I STUDY? ==================== -->
+    <section id="view-room5" class="room-view" data-room="room5">
+      <div class="room-inner room5-container">
+        <header class="room-title-block pixel-header-box">
+          <span class="room-number-tag">ROOM 05 // STUDY</span>
+          <h2 class="room-heading">DID I STUDY?</h2>
+          <p class="room-subtext">A desk beside the window. An honest record of reality.</p>
+        </header>
+
+        <!-- Daily Study Question Box -->
+        <div class="study-decision-box pixel-box">
+          <div class="study-question-line">
+            <span class="study-date-badge" id="study-current-date-badge">TODAY</span>
+            <span class="study-prompt-text">DID I STUDY TODAY?</span>
+          </div>
+
+          <div class="study-buttons-row">
+            <button id="btn-study-yes" class="btn-pixel-choice choice-yes">YES</button>
+            <button id="btn-study-no" class="btn-pixel-choice choice-no">NO</button>
+          </div>
+
+          <!-- Expanding detail form when YES is selected -->
+          <div id="study-yes-details" class="study-details-drawer hidden">
+            <div class="study-inputs-row">
+              <div class="study-field">
+                <label for="study-subject-input">WHAT DID YOU STUDY?</label>
+                <input type="text" id="study-subject-input" class="pixel-input" placeholder="e.g. Pixel Art Shaders, Japanese, Algorithms..." autocomplete="off">
+              </div>
+              <div class="study-field duration-field">
+                <label for="study-duration-input">HOW LONG?</label>
+                <input type="text" id="study-duration-input" class="pixel-input" placeholder="e.g. 1h 30m" autocomplete="off">
+              </div>
+            </div>
+            <button id="btn-record-study" class="btn-pixel-primary">RECORD DAY</button>
+          </div>
+          
+          <div id="study-status-banner" class="study-status-banner hidden pixel-sub-box">
+            <!-- Feedback on today's saved status -->
+          </div>
+        </div>
+
+        <!-- Quiet Visual Calendar -->
+        <div class="study-calendar-panel pixel-box">
+          <div class="calendar-header">
+            <button id="btn-prev-month" class="cal-nav-btn" aria-label="Previous month">◄</button>
+            <span id="calendar-month-title" class="calendar-title">AUGUST 2026</span>
+            <button id="btn-next-month" class="cal-nav-btn" aria-label="Next month">►</button>
+          </div>
+
+          <div class="calendar-weekdays">
+            <span>MO</span><span>TU</span><span>WE</span><span>TH</span><span>FR</span><span>SA</span><span>SU</span>
+          </div>
+
+          <div id="study-calendar-grid" class="study-calendar-grid">
+            <!-- Days rendered dynamically -->
+          </div>
+
+          <div class="calendar-legend">
+            <span class="legend-item"><span class="legend-dot studied"></span> Studied</span>
+            <span class="legend-item"><span class="legend-dot not-studied"></span> Did not study</span>
+            <span class="legend-item"><span class="legend-dot empty"></span> Unrecorded</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Floating Room Switcher / Controls Dock -->
+  <footer id="house-dock" class="house-dock pixel-dock">
+    <div class="dock-left">
+      <button id="btn-ambient-audio" class="dock-btn" title="Toggle ambient nocturnal soundscape">
+        <span id="audio-icon" class="dock-icon">♫</span>
+        <span id="audio-label" class="dock-label">Sound: OFF</span>
+      </button>
+      <span id="dock-track-indicator" class="dock-track-indicator" title="Current generative soundscape">House · Drift</span>
+    </div>
+
+    <div class="dock-center">
+      <button class="dock-room-link" data-goto="hall" title="THE HOUSE">HOUSE</button>
+      <span class="dock-sep">·</span>
+      <button class="dock-room-link" data-goto="room1" title="01 — WHAT AM I THINKING?">[01] THOUGHTS</button>
+      <span class="dock-sep">·</span>
+      <button class="dock-room-link" data-goto="room2" title="02 — WHAT DID I WATCH?">[02] CINEMA</button>
+      <span class="dock-sep">·</span>
+      <button class="dock-room-link" data-goto="room3" title="03 — WHAT AM I LISTENING TO?">[03] MUSIC</button>
+      <span class="dock-sep">·</span>
+      <button class="dock-room-link" data-goto="room4" title="04 — MY IMAGINATION">[04] ETHER</button>
+      <span class="dock-sep">·</span>
+      <button class="dock-room-link" data-goto="room5" title="05 — DID I STUDY?">[05] STUDY</button>
+    </div>
+
+    <div class="dock-right">
+      <button id="btn-open-backup" class="dock-btn" title="Sanctuary Data & Privacy Backup">
+        <span class="dock-icon">⟐</span>
+        <span class="dock-label">Vault</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Modal: YouTube Music / Takeout History Importer -->
+  <div id="music-import-modal" class="house-modal-backdrop hidden">
+    <div class="music-import-modal-content pixel-box">
+      <button id="btn-close-music-import" class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 class="vault-title">IMPORT LISTENING HISTORY</h3>
+      <p class="vault-desc">Import songs into the <strong>NEW SONGS</strong> staging queue. No records are made permanent until you approve them with <strong>KEEP</strong>.</p>
+      
+      <div class="import-source-tabs pixel-bar">
+        <button id="tab-import-takeout" class="import-tab active">GOOGLE TAKEOUT / JSON</button>
+        <button id="tab-import-sample" class="import-tab">SAMPLE BATCH</button>
+      </div>
+
+      <div id="import-pane-takeout" class="import-pane">
+        <textarea id="import-json-input" class="pixel-input" placeholder="Paste YouTube Music Takeout JSON or array of songs here..." rows="6"></textarea>
+        <div class="import-actions-row">
+          <label class="btn-pixel-secondary vault-import-label">
+            <span>UPLOAD .JSON FILE</span>
+            <input type="file" id="input-import-music-file" accept=".json" style="display: none;">
+          </label>
+          <button id="btn-run-json-import" class="btn-pixel-primary">STAGE FOR REVIEW</button>
+        </div>
+      </div>
+
+      <div id="import-pane-sample" class="import-pane hidden">
+        <p class="sample-import-desc">Stage a sample batch of YouTube Music listening events (Radiohead, Aphex Twin, Sigur Rós, M83) to test the review workflow.</p>
+        <button id="btn-load-sample-pending" class="btn-pixel-primary full-width">STAGE SAMPLE BATCH</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Fragment Reader (For Room 4) -->
+  <div id="fragment-modal" class="house-modal-backdrop hidden">
+    <div class="fragment-modal-content pixel-box">
+      <button id="btn-close-fragment" class="modal-close-btn" aria-label="Close fragment">✕</button>
+      <span id="modal-fragment-date" class="modal-fragment-date"></span>
+      <h3 id="modal-fragment-title" class="modal-fragment-title"></h3>
+      <div id="modal-fragment-body" class="modal-fragment-body"></div>
+      <div class="modal-fragment-actions">
+        <button id="btn-delete-fragment" class="btn-text-danger">DISSOLVE FRAGMENT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Privacy & Vault Backup -->
+  <div id="vault-modal" class="house-modal-backdrop hidden">
+    <div class="vault-modal-content pixel-box">
+      <button id="btn-close-vault" class="modal-close-btn" aria-label="Close vault">✕</button>
+      <h3 class="vault-title">SANCTUARY VAULT</h3>
+      <p class="vault-desc">Your sanctuary is 100% private and stays entirely inside your browser and local database. You can export a single quiet backup file or restore previously saved records at any time.</p>
+      
+      <div class="vault-actions-block">
+        <button id="btn-export-data" class="btn-pixel-primary">DOWNLOAD SANCTUARY BACKUP (.JSON)</button>
+        <label class="btn-pixel-secondary vault-import-label">
+          <span>RESTORE BACKUP</span>
+          <input type="file" id="input-import-data" accept=".json" style="display: none;">
+        </label>
+      </div>
+
+      <div class="vault-footer">
+        <button id="btn-clear-all" class="btn-text-danger">RESET ALL SANCTUARY RECORDS</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>

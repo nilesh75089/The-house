@@ -1,0 +1,285 @@
+/* ==========================================================================
+   THE HOUSE — Room 2: WHAT DID I WATCH? (Pixel Cinema)
+   Atmosphere: Old empty cinema, rows of dark velvet seats, projector glow
+   ========================================================================== */
+
+.room2-container {
+  max-width: 820px;
+}
+
+/* Statistics Bar */
+.cinema-stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.4rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stat-label {
+  font-family: var(--font-pixel-title);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.stat-val {
+  font-family: var(--font-pixel-title);
+  font-size: 1.25rem;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000;
+}
+
+.stat-divider {
+  width: 2px;
+  height: 30px;
+  background: var(--px-border-mid);
+}
+
+.stat-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stat-prose {
+  font-family: var(--font-pixel-body);
+  font-size: 0.95rem;
+  color: var(--text-gold);
+}
+
+/* Cinema Composer */
+.cinema-composer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cinema-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.cinema-status-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.status-radio-label.pixel-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-pixel-title);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.35rem 0.65rem;
+  background: #111520;
+  border: 1px solid var(--px-border-mid);
+  box-shadow: inset 1px 1px 0px 0px #242c3d;
+  transition: all 0.1s;
+}
+
+.status-radio-label.pixel-radio:hover {
+  border-color: var(--px-border-light);
+  color: #fff;
+}
+
+.status-radio-label.pixel-radio input[type="radio"] {
+  accent-color: var(--accent-amber);
+  cursor: pointer;
+}
+
+.status-radio-label.pixel-radio:has(input[type="radio"]:checked) {
+  border-color: var(--px-border-amber);
+  background: #252014;
+  color: var(--text-amber);
+  box-shadow: inset 1px 1px 0px 0px #5c4515;
+}
+
+.cinema-composer-actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cinema-composer-actions input {
+  flex: 1;
+  min-width: 240px;
+}
+
+/* Cinema Filter Tabs */
+.cinema-log-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cinema-filter-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.cinema-tab {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-pixel-title);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.7rem;
+  transition: all 0.1s;
+}
+
+.cinema-tab:hover {
+  color: #fff;
+  border-color: var(--px-border-mid);
+}
+
+.cinema-tab.active {
+  color: var(--text-gold);
+  border-color: var(--px-border-amber);
+  background: #252014;
+}
+
+/* Movie List Items */
+.cinema-movies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.movie-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  background: var(--bg-sub);
+  border: 1px solid var(--px-border-mid);
+  box-shadow: inset 1px 1px 0px 0px #182030;
+  transition: border-color 0.15s;
+}
+
+.movie-item:hover {
+  border-color: var(--px-border-light);
+}
+
+.movie-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.movie-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.movie-title-text {
+  font-family: var(--font-pixel-title);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  user-select: text;
+}
+
+.movie-status-tag {
+  font-family: var(--font-pixel-title);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  text-transform: uppercase;
+}
+
+.tag-watching {
+  background: #132433;
+  color: var(--text-moon);
+  border: 1px solid var(--px-border-moon);
+}
+
+.tag-finished {
+  background: #14281b;
+  color: #78e08f;
+  border: 1px solid #2ed573;
+}
+
+.tag-abandoned {
+  background: #2d1616;
+  color: #ff7675;
+  border: 1px solid #eb4d4b;
+}
+
+.movie-note {
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  user-select: text;
+}
+
+.movie-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.movie-status-select {
+  background: #090c12;
+  border: 1px solid var(--px-border-mid);
+  color: var(--text-secondary);
+  font-family: var(--font-pixel-title);
+  font-size: 0.68rem;
+  padding: 0.25rem 0.45rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.movie-status-select:focus {
+  border-color: var(--px-border-amber);
+}
+
+.movie-del-btn {
+  background: none;
+  border: 1px solid var(--px-border-mid);
+  color: var(--text-muted);
+  font-family: var(--font-pixel-title);
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  transition: all 0.15s;
+}
+
+.movie-del-btn:hover {
+  color: #ff7675;
+  border-color: #eb4d4b;
+}
+
+@media (max-width: 650px) {
+  .cinema-stats-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .movie-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .movie-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

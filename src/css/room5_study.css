@@ -1,0 +1,292 @@
+/* ==========================================================================
+   THE HOUSE — Room 5: DID I STUDY? (Pixel Study Room)
+   Atmosphere: Quiet study room at night, desk beside window, warm lamp
+   ========================================================================== */
+
+.room5-container {
+  max-width: 780px;
+}
+
+/* Study Decision Box */
+.study-decision-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.study-question-line {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.study-date-badge {
+  font-family: var(--font-pixel-title);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-gold);
+  background: #252014;
+  border: 1px solid var(--px-border-amber);
+  padding: 0.25rem 0.6rem;
+}
+
+.study-prompt-text {
+  font-family: var(--font-pixel-title);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.study-buttons-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-pixel-choice {
+  flex: 1;
+  padding: 0.9rem;
+  font-family: var(--font-pixel-title);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  background: #111520;
+  border: 2px solid var(--px-border-mid);
+  color: var(--text-secondary);
+  box-shadow: inset -2px -2px 0px 0px #080b10, inset 2px 2px 0px 0px #2a3449, 0 2px 0 0 #000;
+  transition: all 0.1s;
+}
+
+.btn-pixel-choice.choice-yes:hover,
+.btn-pixel-choice.choice-yes.selected {
+  background: #2b2314;
+  border-color: var(--px-border-amber);
+  color: #fff;
+  box-shadow: inset -2px -2px 0px 0px #141108, inset 2px 2px 0px 0px #ffe599, 0 0 12px var(--accent-amber-glow);
+}
+
+.btn-pixel-choice.choice-no:hover,
+.btn-pixel-choice.choice-no.selected {
+  background: #1c2230;
+  border-color: var(--px-border-light);
+  color: #dcdde1;
+}
+
+/* Expanding Details Drawer */
+.study-details-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--px-border-mid);
+}
+
+.study-details-drawer.hidden {
+  display: none;
+}
+
+.study-inputs-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.study-field {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.study-field.duration-field {
+  flex: 1;
+  min-width: 140px;
+}
+
+.study-field label {
+  font-family: var(--font-pixel-title);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.study-status-banner {
+  font-family: var(--font-pixel-body);
+  font-size: 0.95rem;
+  color: var(--text-gold);
+  border-left: 3px solid var(--px-border-amber);
+}
+
+.study-status-banner.hidden {
+  display: none;
+}
+
+/* Pixel Calendar */
+.study-calendar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar-title {
+  font-family: var(--font-pixel-title);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.cal-nav-btn {
+  background: #111520;
+  border: 1px solid var(--px-border-mid);
+  color: var(--text-secondary);
+  font-family: var(--font-pixel-title);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  transition: all 0.1s;
+}
+
+.cal-nav-btn:hover {
+  border-color: var(--px-border-amber);
+  color: var(--text-gold);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-family: var(--font-pixel-title);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--px-border-mid);
+}
+
+.study-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+
+.cal-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-sub);
+  border: 1px solid var(--px-border-mid);
+  position: relative;
+  transition: all 0.1s;
+  cursor: default;
+}
+
+.cal-day-cell.other-month {
+  opacity: 0.25;
+}
+
+.cal-day-num {
+  font-family: var(--font-pixel-title);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.cal-indicator-dot {
+  width: 4px;
+  height: 4px;
+  margin-top: 2px;
+}
+
+/* Studied state: soft warm amber pixel */
+.cal-day-cell.studied {
+  background: #252014;
+  border-color: var(--px-border-amber);
+}
+
+.cal-day-cell.studied .cal-day-num {
+  color: var(--text-amber);
+}
+
+.cal-day-cell.studied .cal-indicator-dot {
+  background: var(--text-gold);
+  box-shadow: 0 0 4px var(--text-gold);
+}
+
+/* Not studied state: quiet muted pixel */
+.cal-day-cell.not-studied {
+  background: #0d1017;
+  border-color: #1a202c;
+}
+
+.cal-day-cell.not-studied .cal-day-num {
+  color: var(--text-dim);
+}
+
+.cal-day-cell.not-studied .cal-indicator-dot {
+  background: var(--text-dim);
+}
+
+/* Today outline */
+.cal-day-cell.today {
+  border-color: var(--px-border-moon);
+  box-shadow: inset 0 0 0 1px var(--px-border-moon);
+}
+
+/* Tooltip on hover */
+.cal-day-cell[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #080b10;
+  border: 1px solid var(--px-border-amber);
+  color: #fff;
+  font-family: var(--font-pixel-body);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  font-family: var(--font-pixel-body);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--px-border-mid);
+  padding-top: 0.8rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.legend-dot.studied {
+  background: var(--text-gold);
+  box-shadow: 0 0 4px var(--text-gold);
+}
+
+.legend-dot.not-studied {
+  background: var(--text-dim);
+}
+
+.legend-dot.empty {
+  border: 1px solid var(--text-dim);
+  background: transparent;
+}
